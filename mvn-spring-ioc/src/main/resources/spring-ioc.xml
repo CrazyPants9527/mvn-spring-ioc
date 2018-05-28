@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+   <bean id="hello" class="net.study.spring.ioc.bean.Hello">
+   		<property name="name" value="stone"/>
+   </bean>
+   
+   <!--静态工厂方法创建  -->
+   <!-- <bean id="creatproduct" class="net.study.spring.ioc.bean.ProductFactory" factory-method="creatProduct"></bean> -->
+   
+   <!--非静态方法工厂创建  -->
+   <bean id="factory" class="net.study.spring.ioc.bean.ProductFactory"></bean>
+   <bean id="creatproductid" factory-bean="factory" factory-method="creatProduct"></bean>
+   
+   <!-- user属性用构造器注入 -->
+   <bean id="conuser" class="net.study.spring.ioc.bean.User">
+   		<constructor-arg index="0">
+   			<value>李大爷</value>
+   		</constructor-arg>
+   		<constructor-arg index="1">
+   			<value>李大爷的密码</value>
+   		</constructor-arg>
+   </bean> 
+   
+   <!--user属性用set注入  -->
+   <bean id="setuser" class="net.study.spring.ioc.bean.User">
+   		<property name="name">
+   			<value>李呵呵</value>
+   		</property>
+   		<property name="password">
+   			<value>李呵呵的密码</value>
+   		</property>
+   		<property name="books">
+   			<list>
+   				<value>饶命大王</value>
+   			</list>
+   		</property>
+   		<property name="ha">
+   			<set>
+   				<value>哈哈</value>
+   			</set>
+   		</property>
+   		
+   		<property name="fool">
+   			<map>
+   				<entry key="1">
+   					<value>华美莱</value> 
+   				</entry>
+   			</map>
+   		</property>
+   		<property name="movie">
+   			<props>
+   				<prop key="华语电影">回魂夜</prop>
+   			</props>
+   		</property>
+   </bean>
+ 
+	<!--生命周期方法  -->
+	<bean id="livemethod" class="net.study.spring.ioc.bean.Live" init-method="initMethod" destroy-method="destroyMethod"></bean>
+</beans>
